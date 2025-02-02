@@ -70,7 +70,8 @@ export const resumeData = {
     'Docker',
     'Kubernetes',
     'AWS',
-    'CI/CD Pipelines'
+    'CI/CD Pipelines',
+    'Testing'
   ],
   interests: [
     'Exploring new technologies and frameworks',

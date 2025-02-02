@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { resumeData } from '../../data/resume-data';
+import { Component, inject, OnInit } from '@angular/core';
+import { ResumeService } from '../../services/resume.service';
 
 @Component({
   selector: 'app-skills',
@@ -8,6 +8,16 @@ import { resumeData } from '../../data/resume-data';
   templateUrl: './skills.component.html',
   styleUrl: './skills.component.scss'
 })
-export class SkillsComponent {
-  skills = resumeData.skills
+export class SkillsComponent implements OnInit {
+  private resumeService = inject(ResumeService)
+
+  skills: string[] = []
+
+  ngOnInit(): void {
+    this.resumeService.skills$().subscribe({
+      next: (data) => {
+        this.skills = data
+      }
+    })
+  }
 }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { resumeData } from '../../data/resume-data';
+import { Component, inject, OnInit } from '@angular/core';
+import { Education } from '../../models/resume-model';
+import { ResumeService } from '../../services/resume.service';
 
 @Component({
   selector: 'app-education',
@@ -8,6 +9,15 @@ import { resumeData } from '../../data/resume-data';
   templateUrl: './education.component.html',
   styleUrl: './education.component.scss'
 })
-export class EducationComponent {
-  education = resumeData.education
+export class EducationComponent implements OnInit {
+  education: Education[] = []
+
+  private resumeService = inject(ResumeService)
+
+  ngOnInit(): void {
+    this.resumeService.education$().subscribe((data) => {
+      this.education = data
+    })
+  }
+
 }
